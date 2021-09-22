@@ -34,6 +34,32 @@ window.addEventListener('load', function () {
             this.canvasHeight = this.context.canvas.height;
             this.score = 0;
         };
+
+        var myCanvas = document.querySelector('#canvas');
+        /*获取绘图工具*/
+        var context = myCanvas.getContext('2d');
+        var gridSize = 20;
+        // 获取画布的长度和宽度
+        var height = myCanvas.height;
+        var width = myCanvas.width;
+        // 在x轴上可以画多少条线
+        var xLineTotal = Math.floor(width / gridSize);
+        for (var i = 1; i < xLineTotal; i++) {
+            context.beginPath();
+            context.moveTo(gridSize * i - 0.5, 0);
+            context.lineTo(gridSize * i - 0.5, height);
+            // context.strokeStyle = '#ccc';
+            context.stroke();
+        }
+        // 在y轴上可以画多少条线
+        var yLineTotal = Math.floor(height / gridSize);
+        for (var i = 1; i < yLineTotal; i++) {
+            context.beginPath();
+            context.moveTo(0, i * gridSize - 0.5);
+            context.lineTo(width, i * gridSize - 0.5);
+            // context.strokeStyle = '#ccc';
+            context.stroke();
+        }
         // 声明一个数组用来用来记录食物生成的位置,也就是为在小蛇吃掉一个食物之后，删除这个食物
         var ele = [];
         // 在画布上初始化食物对象
@@ -143,16 +169,41 @@ window.addEventListener('load', function () {
                 // 当蛇吃到食物的时候统计蛇吃的食物数量
                 var span = document.querySelector('#score');
                 foot.score++;
-                if (foot.score>=10) {
-                    score.innerHTML = '0'+foot.score;
-                }else if(foot.score>=100){
+                if (foot.score >= 10) {
+                    score.innerHTML = '0' + foot.score;
+                } else if (foot.score >= 100) {
                     score.innerHTML = foot.score;
-                }else {
-                    score.innerHTML = '00'+foot.score;
+                } else {
+                    score.innerHTML = '00' + foot.score;
                 }
             }
             // 在此初始化小蛇
             this.init();
+            var myCanvas = document.querySelector('#canvas');
+            /*获取绘图工具*/
+            var context = myCanvas.getContext('2d');
+            var gridSize = 20;
+            // 获取画布的长度和宽度
+            var height = myCanvas.height;
+            var width = myCanvas.width;
+            // 在x轴上可以画多少条线
+            var xLineTotal = Math.floor(width / gridSize);
+            for (var i = 1; i < xLineTotal; i++) {
+                context.beginPath();
+                context.moveTo(gridSize * i - 0.5, 0);
+                context.lineTo(gridSize * i - 0.5, height);
+                // context.strokeStyle = '#ccc';
+                context.stroke();
+            }
+            // 在y轴上可以画多少条线
+            var yLineTotal = Math.floor(height / gridSize);
+            for (var i = 1; i < yLineTotal; i++) {
+                context.beginPath();
+                context.moveTo(0, i * gridSize - 0.5);
+                context.lineTo(width, i * gridSize - 0.5);
+                // context.strokeStyle = '#ccc';
+                context.stroke();
+            }
         };
         // 蛇移除的方法
         Snake.prototype.remove = function () {
@@ -227,22 +278,22 @@ window.addEventListener('load', function () {
             if (x >= maxX || x < 0 || y < 0 || y >= maxY) {
                 clearInterval(timer);
                 btn2.disabled = true;
-                var over=document.querySelector('.over');
-                over.style.display='block';
-                var totalScore=over.querySelector('#totalScore');
+                var over = document.querySelector('.over');
+                over.style.display = 'block';
+                var totalScore = over.querySelector('#totalScore');
                 var span = document.querySelector('#score');
-                totalScore.innerHTML=span.innerHTML;
+                totalScore.innerHTML = span.innerHTML;
             }
             // 当蛇头触碰到蛇的身体游戏结束
             for (var i = 1; i < this.snack.body.length; i++) {
                 if (x == this.snack.body[i].x && y == this.snack.body[i].y) {
                     clearInterval(timer);
                     btn2.disabled = true;
-                    var over=document.querySelector('.over');
-                    over.style.display='block';
-                    var totalScore=over.querySelector('#totalScore');
+                    var over = document.querySelector('.over');
+                    over.style.display = 'block';
+                    var totalScore = over.querySelector('#totalScore');
                     var span = document.querySelector('#score');
-                    totalScore.innerHTML=span.innerHTML;
+                    totalScore.innerHTML = span.innerHTML;
                 }
             }
         };
