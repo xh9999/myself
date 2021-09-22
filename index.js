@@ -316,6 +316,8 @@ window.addEventListener('load', function () {
         btn2.innerHTML = '暂停游戏';
         game.starGame();
         btn2.disabled = false;
+        var over = document.querySelector('.over');
+        over.style.display = 'none';
     };
     btn2.onclick = function () {
         this.innerHTML = this.innerHTML == '暂停游戏' ? '继续游戏' : '暂停游戏';
